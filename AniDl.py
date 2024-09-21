@@ -23,67 +23,14 @@ TechZApi = TechZApi()
 static_ffmpeg.add_paths()
 
 
-while True:
-    try:
-        search = TechZApi.gogo_search("kimetsu-no-yaiba-dub")
-        anime = search[0] 
-        break
-    except KeyboardInterrupt:
-        print("Exiting...")
-        exit()
-    except:
-        print("Invalid Choice")
-        continue
-
-
-# Episodes
-
+search = TechZApi.gogo_search("kimetsu-no-yaiba-dub")
+anime = search[0] 
 title = anime.get("title")
 anime = TechZApi.gogo_anime(anime.get("id"))["results"]
 episodes = anime["episodes"]
+ep_range = "*"
+quality = "1080"
 
-
-while True:
-    try:
-        
-        ep_range = "*"
-        if ep_range == "*":
-            break
-        if "-" not in ep_range:
-            episodes = [episodes[int(ep_range) - 1]]
-            break
-
-        x, y = ep_range.split("-")
-        episodes = episodes[(int(x) - 1) : int(y)]
-        break
-    except KeyboardInterrupt:
-        print("Exiting...")
-        exit()
-    except:
-        print("Invalid Choice")
-        continue
-
-
-
-while True:
-    try:
-        select = 4
-
-        if select == 1:
-            quality = "360"
-        elif select == 2:
-            quality = "480"
-        elif select == 3:
-            quality = "720"
-        elif select == 4:
-            quality = "1080"
-        break
-    except KeyboardInterrupt:
-        print("Exiting...")
-        exit()
-    except:
-        print("Invalid Choice")
-        continue
 
 # Keep track of the progress while uploading
 async def progress(current, total):
@@ -104,8 +51,6 @@ def download_file(url, save_path):
         print(f"Error downloading file: {e}")
 
 
-
-# Download
 async def StartDownload():
   async with app:
     resetCache()
