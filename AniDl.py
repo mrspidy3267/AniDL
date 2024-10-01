@@ -22,8 +22,9 @@ app = Client("Anime_downloader_bot", api_id=API_ID, api_hash=API_HASH, bot_token
 TechZApi = TechZApi()
 
 
-
-search = TechZApi.gogo_search("kimetsu-no-yaiba-dub")
+with open("animes.txt") aa file:
+    dlname = file.readline().strip()
+search = TechZApi.gogo_search(dlname)
 anime = search[0] 
 title = anime.get("title")
 anime = TechZApi.gogo_anime(anime.get("id"))["results"]
