@@ -4,7 +4,6 @@ from Utils.TechZApi import TechZApi
 from Utils.Downloader import startM3U8Download, resetCache
 from Utils.FFmpeg import ConvertTsToMp4
 from pyrogram import Client, filters
-
 import requests
 
 
@@ -22,7 +21,7 @@ app = Client("Anime_downloader_bot", api_id=API_ID, api_hash=API_HASH, bot_token
 TechZApi = TechZApi()
 
 
-with open("animes.txt") aa file:
+with open("animes.txt") as file:
     dlname = file.readline().strip()
 search = TechZApi.gogo_search(dlname)
 anime = search[0] 
