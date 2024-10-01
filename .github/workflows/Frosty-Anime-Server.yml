@@ -14,6 +14,9 @@ jobs:
            ls
       - name: Installing Requirements
         run: |
+           sudo apt-get update && sudo apt install ffmpeg -y
+      - name: Installing Requirements
+        run: |
            sudo pip install -r requirements.txt
       - name: Running Script
         run: |
