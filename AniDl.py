@@ -63,11 +63,13 @@ async def StartDownload():
     for ep in episodes:
         episode_id = ep[1]
         ep = ep[0]
-        try:
+        while True:
+         try:
             anime['name']= anime['name'].replace("/", " ").replace("\\",' ')
             image = anime['image']
             data = TechZApi.gogo_episode(episode_id)["results"]
             file = data["stream"]["sources"][0]["file"]
+            filebk = data["stream"]["sources_bk"][0]["file"]
             await startM3U8Download(session, file, quality, workers)
             download_file(image, 'thumb.png')
             filepath = convertFilePath(f"./Downloads/{anime.get('name')}/{anime.get('name')} - Episode {ep} - {quality}p.mp4")
@@ -76,10 +78,10 @@ async def StartDownload():
             await app.send_document(1039959953,filepath,thumb="thumb.png",progress=progress)
             os.remove(filepath)
             os.remove("thumb.png")
-        except Exception as e:
+         except Exception as e:
             print("Failed To Download Episode", ep)
             print("Error: ", e)
-            continue
+            file = filebk
     await session.close()
 
 
