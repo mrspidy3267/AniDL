@@ -63,6 +63,7 @@ async def StartDownload():
     for ep in episodes:
         episode_id = ep[1]
         ep = ep[0]
+        up = True
         while True:
          try:
             anime['name']= anime['name'].replace("/", " ").replace("\\",' ')
@@ -78,6 +79,8 @@ async def StartDownload():
             await app.send_document(1039959953,filepath,thumb="thumb.png",progress=progress)
             os.remove(filepath)
             os.remove("thumb.png")
+            up = False
+            break
          except Exception as e:
             print("Failed To Download Episode", ep)
             print("Error: ", e)
